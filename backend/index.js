@@ -1,6 +1,6 @@
 require('dotenv').config();
 require('express-async-errors');
-const { clientURL } = require('./URI');
+const { clientURL } = require('./Uri');
 const fileUpload = require('express-fileupload');
 const express = require('express');
 const cloudinary = require('cloudinary').v2;
@@ -9,6 +9,18 @@ const connectDB = require('./db/connect');
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
+
+const {
+	addUser,
+	getUserID,
+	getSocketID,
+	removeUser,
+} = require('./socket/users');
+const {
+	createMessage,
+	deleteMessages,
+	deleteChat,
+} = require('./utils/messageSocketEvents');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -33,3 +45,50 @@ app.use(cors({ origin: clientURL }));
 app.get('/', (req, res) => {
 	res.status(200).json({ message: 'welcome' });
 });
+
+// socket.io
+
+io.on('connection', (socket) => {
+	io.emit('usersOnline', addUser(socket.handshake.query.id, socket.id));
+	socket.on('send message', async (message, to, chatId, id) => {
+		socket
+			.to(getSocketID(to))
+			.emit('receive message', message, getUserID(socket.id));
+		await createMessage({ chatId, id, message });
+	});
+	socket.on('delete chat', async (chatID, to) => {
+		socket.to(getSocketID(to)).emit('delete chat', chatID);
+		await deleteChat({ chatID });
+	});
+	socket.on('clear chat', async (chatID, to) => {
+		socket.to(getSocketID(to)).emit('clear chat', chatID);
+		await deleteMessages({ chatID });
+	});
+	socket.on('disconnect', () => {
+		io.emit('usersOnline', removeUser(socket.id));
+	});
+});
+
+// routes
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', authorizationMiddleware, userRouter);
+app.use('/api/v1/posts', authorizationMiddleware, postRouter);
+app.use('/api/v1/chats', authorizationMiddleware, chatRouter);
+app.use('/api/v1/messages', authorizationMiddleware, messageRouter);
+
+app.use(errorHandlerMiddleware);
+app.use(notFoundMiddleware);
+
+const start = async () => {
+	try {
+		await connectDB(process.env.MONGO_URI);
+		server.listen(PORT, () =>
+			console.log(`Server is listening on port ${PORT}`)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+start();
