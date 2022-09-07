@@ -81,11 +81,11 @@ io.on('connection', (socket) => {
 
 // routes
 
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/users', authorizationMiddleware, userRouter);
-app.use('/api/v1/posts', authorizationMiddleware, postRouter);
-app.use('/api/v1/chats', authorizationMiddleware, chatRouter);
-app.use('/api/v1/messages', authorizationMiddleware, messageRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', authorizationMiddleware, userRouter);
+app.use('/api/posts', authorizationMiddleware, postRouter);
+app.use('/api/chats', authorizationMiddleware, chatRouter);
+app.use('/api/messages', authorizationMiddleware, messageRouter);
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
