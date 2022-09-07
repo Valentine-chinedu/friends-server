@@ -6,6 +6,12 @@ const express = require('express');
 const cloudinary = require('cloudinary').v2;
 const connectDB = require('./db/connect');
 
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+const postRouter = require('./routes/post');
+const chatRouter = require('./routes/chat');
+const messageRouter = require('./routes/message');
+
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
