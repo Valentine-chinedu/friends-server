@@ -10,6 +10,10 @@ const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
 
+const errorHandlerMiddleware = require('./middleware/error-handler');
+const authorizationMiddleware = require('./middleware/authorization');
+const notFoundMiddleware = require('./middleware/not-found');
+
 const {
 	addUser,
 	getUserID,
