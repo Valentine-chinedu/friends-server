@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchChats } from '../../services/chatServices';
+import { fetchChats, createChat } from '../../services/chatServices';
+import { fetchMessages } from '../../services/messageServices';
 
 import { logout } from './userSlice';
 
@@ -31,14 +32,14 @@ export const createChat = createAsyncThunk(
 		const { getState, dispatch, rejectWithValue } = thunkAPI;
 		const { customFetch, id } = props;
 		const { user, users, message } = getState();
-		const data = await customFetch(createChatService, { partnerId: id });
+		const data = await customFetch(createChat, { partnerId: id });
 		if (!data) rejectWithValue();
 		if (message.chats.every((chat) => chat._id !== data.cid)) {
 			dispatch(getAllChats({ customFetch, users: users.users }));
 		}
 		dispatch(messageSlice.actions.setChatID(data.cid));
 		dispatch(messageSlice.actions.setReceiverID(id));
-		const _data = await customFetch(messagesServices, { chatId: data.cid });
+		const _data = await customFetch(fetchMessages, { chatId: data.cid });
 		dispatch(clearMessage());
 		dispatch(setMessages({ messages: _data.messages, id: user.id }));
 	}

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
-import axiosConfig from '../services/axiosConfig';
+import axiosConfig from '../../services/axiosConfig';
 
 const initialState = {
 	id: '',
