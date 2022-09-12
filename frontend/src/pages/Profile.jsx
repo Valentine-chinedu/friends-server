@@ -1,7 +1,7 @@
 import React from 'react';
 import Gallery from '../shared/Gallery';
 import Online from '../shared/Online';
-import Posts from '../shared/Posts';
+import Posts from '../shared/Post';
 import ProfileCard from '../shared/ProfileCard';
 
 const Profile = () => {
