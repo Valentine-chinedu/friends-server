@@ -1,6 +1,6 @@
-import CreatePost from '../shared/CreatePost';
-import Online from '../shared/Online';
-import Profile from '../shared/ProfileCard';
+import CreatePost from '../shared components/CreatePost';
+import Online from '../shared components/Online';
+import Profile from '../shared components/ProfileCard';
 
 const Home = () => {
 	return (

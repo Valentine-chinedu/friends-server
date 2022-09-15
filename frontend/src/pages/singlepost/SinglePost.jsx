@@ -1,6 +1,5 @@
-import React from 'react';
-import Online from '../../shared/Online';
-import Post from '../../shared/Post';
+import Online from '../../shared components/Online';
+import Post from '../../shared components/Post';
 import Comments from './components/Comments';
 import Input from './components/Input';
 

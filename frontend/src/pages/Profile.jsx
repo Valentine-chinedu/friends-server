@@ -1,8 +1,8 @@
 import React from 'react';
-import Gallery from '../shared/Gallery';
-import Online from '../shared/Online';
-import Posts from '../shared/Post';
-import ProfileCard from '../shared/ProfileCard';
+import Gallery from '../shared components/Gallery';
+import Online from '../shared components/Online';
+import Posts from '../shared components/Post';
+import ProfileCard from '../shared components/ProfileCard';
 
 const Profile = () => {
 	return (
