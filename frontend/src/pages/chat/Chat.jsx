@@ -1,12 +1,19 @@
 import React from 'react';
-import Messenger from '../messenger/Messenger';
+import { useSelector } from 'react-redux';
+import Messenger from '../../sharedcomponents/Messenger';
 import ChatCard from './components/ChatCard';
 
 const Chat = () => {
+	const {
+		message: { chats },
+	} = useSelector((state) => state);
+
 	return (
 		<main>
 			<section>
-				<ChatCard />
+				{chats.map((chat) => (
+					<ChatCard chat={chat} key={chat._id} />
+				))}
 			</section>
 			<Messenger />
 		</main>
