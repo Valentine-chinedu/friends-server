@@ -16,7 +16,7 @@ const useFetch = () => {
 				dispatch(showModal({ msg }));
 			}
 		},
-		[dispatch]
+		[dispatch, navigate]
 	);
 };
 
