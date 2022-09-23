@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { dp } from 'frontend/src/assets/dp.jpg';
+import dp from '../../../assets/dp.jpg';
 
 import { useNavigate } from 'react-router-dom';
 import useFetch from '../../../hooks/useFetch';
@@ -9,6 +9,9 @@ import {
 	setMessages,
 	setReceiverID,
 } from '../../../redux/slices/messageSlice';
+
+import './chatcard.css';
+import { fetchMessagesService } from '../../../services/messageServices';
 
 const ChatCard = ({ chat }) => {
 	const { userDetails } = chat;
@@ -35,11 +38,22 @@ const ChatCard = ({ chat }) => {
 	};
 
 	return (
-		<article onClick={setChat} className={active ? '' : ''}>
+		<article
+			onClick={setChat}
+			className={active ? 'active chatcard' : 'chatcard'}
+		>
 			<div
-				className={usersOnline.some((u) => u.id === userDetails._id) ? '' : ''}
+				className={
+					usersOnline.some((u) => u.id === userDetails._id)
+						? 'green chatcard__dp'
+						: 'chatcard__dp'
+				}
 			>
-				<img src={userDetails.profileImage || dp} alt='' />
+				<img
+					src={userDetails.profileImage || dp}
+					alt=''
+					className='roundimage'
+				/>
 			</div>
 			<div>
 				<h2>{userDetails.name || 'User'}</h2>

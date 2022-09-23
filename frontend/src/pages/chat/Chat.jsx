@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Messenger from '../../sharedcomponents/Messenger';
+import Messenger from '../../sharedcomponents/messenger/Messenger';
 import ChatCard from './components/ChatCard';
+
+import './chat.css';
 
 const Chat = () => {
 	const {
@@ -9,8 +11,8 @@ const Chat = () => {
 	} = useSelector((state) => state);
 
 	return (
-		<main>
-			<section>
+		<main className='chat__page'>
+			<section className='chat__page__cards'>
 				{chats.map((chat) => (
 					<ChatCard chat={chat} key={chat._id} />
 				))}
