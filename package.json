@@ -2,34 +2,32 @@
 	"name": "backend",
 	"version": "1.0.0",
 	"description": "cos media app backend",
-	"main": "index.js",
+	"main": "app.js",
 	"scripts": {
-		"start": "nodemon server.js",
-		"server": "nodemon server.js"
+		"start": "nodemon app.js",
+		"server": "nodemon app.js"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"axios": "^0.27.2",
-		"bcrypt": "^5.0.1",
+		"axios": "^0.26.1",
 		"bcryptjs": "^2.4.3",
-		"cloudinary": "^1.31.0",
-		"colors": "^1.4.0",
-		"cookie-parser": "^1.4.6",
+		"cloudinary": "^1.27.1",
 		"cors": "^2.8.5",
-		"dotenv": "^16.0.2",
-		"express": "^4.18.1",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
 		"express-async-errors": "^3.1.1",
-		"express-fileupload": "^1.4.0",
-		"helmet": "^6.0.0",
-		"http-status-codes": "^2.2.0",
+		"express-fileupload": "^1.2.1",
+		"helmet": "^4.6.0",
+		"http-status-codes": "^2.1.4",
 		"jsonwebtoken": "^8.5.1",
-		"mongoose": "^6.5.4",
-		"morgan": "^1.10.0",
-		"nodemon": "^2.0.19",
-		"peer": "^0.6.1",
-		"socket.io": "^4.5.1",
+		"mongoose": "^6.0.13",
+		"nodemon": "^2.0.15",
+		"socket.io": "^4.4.0",
 		"xss-clean": "^0.1.1"
+	},
+	"engines": {
+		"node": "14.x"
 	}
 }
