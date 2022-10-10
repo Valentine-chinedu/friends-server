@@ -19,7 +19,7 @@ const xss = require('xss-clean');
 const app = express();
 const server = require('http').createServer(app);
 const { Server } = require('socket.io');
-const io = new Server(server, { cors: { origin: clientURL } });
+const io = new Server(server, { cors: { origin: process.env.CLIENT_URL } });
 const PORT = process.env.PORT || 5000;
 
 //cloudinary configuration
@@ -48,7 +48,7 @@ app.use(xss());
 app.use(helmet());
 app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
-app.use(cors({ origin: clientURL }));
+app.use(cors({ origin: process.env.CLIENT_URL }));
 
 app.get('/', (req, res) => {
 	res.status(200).json({ message: 'welcome' });
