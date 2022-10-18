@@ -1,7 +1,7 @@
 {
 	"name": "backend",
 	"version": "1.0.0",
-	"description": "cos media app backend",
+	"description": "soc media app backend",
 	"main": "app.js",
 	"scripts": {
 		"start": "nodemon app.js",
@@ -28,6 +28,6 @@
 		"xss-clean": "^0.1.1"
 	},
 	"engines": {
-		"node": "14.x"
+		"node": "18.2.0"
 	}
 }
