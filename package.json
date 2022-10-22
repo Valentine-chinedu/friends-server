@@ -4,8 +4,8 @@
 	"description": "soc media app backend",
 	"main": "app.js",
 	"scripts": {
-		"start": "nodemon index.js",
-		"server": "nodemon index.js"
+		"start": "node index.js",
+		"dev": "node index.js"
 	},
 	"keywords": [],
 	"author": "",
