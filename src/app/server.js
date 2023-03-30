@@ -5,7 +5,7 @@ require('express-async-errors');
 const fileUpload = require('express-fileupload');
 const express = require('express');
 const cloudinary = require('cloudinary').v2;
-const connectDB = require('./db/connect');
+const connectDB = require('../db/connect');
 
 //security dependencies
 
@@ -31,17 +31,17 @@ cloudinary.config({
 
 //Routes
 
-const authRouter = require('./routes/auth');
-const userRouter = require('./routes/user');
-const postRouter = require('./routes/post');
-const chatRouter = require('./routes/chat');
-const messageRouter = require('./routes/message');
+const authRouter = require('../routes/auth');
+const userRouter = require('../routes/user');
+const postRouter = require('../routes/post');
+const chatRouter = require('../routes/chat');
+const messageRouter = require('../routes/message');
 
 //middle wares
 
-const errorHandlerMiddleware = require('./middleware/error-handler');
-const authorizationMiddleware = require('./middleware/authorization');
-const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('../middleware/error-handler');
+const authorizationMiddleware = require('../middleware/authorization');
+const notFoundMiddleware = require('../middleware/not-found');
 
 app.use(xss());
 app.use(helmet());
@@ -60,12 +60,12 @@ const {
 	getUserID,
 	getSocketID,
 	removeUser,
-} = require('./socket/users');
+} = require('../socket/users');
 const {
 	createMessage,
 	deleteMessages,
 	deleteChat,
-} = require('./utils/messageSocketEvents');
+} = require('../utils/messageSocketEvents');
 
 io.on('connection', (socket) => {
 	io.emit('usersOnline', addUser(socket.handshake.query.id, socket.id));
