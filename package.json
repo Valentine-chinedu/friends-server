@@ -4,8 +4,8 @@
 	"description": "soc media app backend",
 	"main": "app.js",
 	"scripts": {
-		"start": "node index.js",
-		"dev": "node index.js"
+		"start": "node server.js",
+		"dev": "node server.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -26,5 +26,8 @@
 		"nodemon": "^2.0.15",
 		"socket.io": "^4.4.0",
 		"xss-clean": "^0.1.1"
+	},
+	"engines": {
+		"node": "^16.17.0"
 	}
 }
