@@ -5,7 +5,7 @@ require('express-async-errors');
 const fileUpload = require('express-fileupload');
 const express = require('express');
 const cloudinary = require('cloudinary').v2;
-const connectDB = require('../db/connect');
+const connectDB = require('./src/db/connect');
 
 //security dependencies
 
@@ -18,7 +18,12 @@ const xss = require('xss-clean');
 const app = express();
 const server = require('http').createServer(app);
 const { Server } = require('socket.io');
-const io = new Server(server, { cors: { origin: process.env.CLIENT_URL } });
+const io = new Server(server, {
+	cors: {
+		origin: 'http://localhost:3000',
+	},
+});
+
 const PORT = process.env.PORT || 5000;
 
 //cloudinary configuration
@@ -31,23 +36,23 @@ cloudinary.config({
 
 //Routes
 
-const authRouter = require('../routes/auth');
-const userRouter = require('../routes/user');
-const postRouter = require('../routes/post');
-const chatRouter = require('../routes/chat');
-const messageRouter = require('../routes/message');
+const authRouter = require('./src/routes/auth');
+const userRouter = require('./src/routes/user');
+const postRouter = require('./src/routes/post');
+const chatRouter = require('./src/routes/chat');
+const messageRouter = require('./src/routes/message');
 
 //middle wares
 
-const errorHandlerMiddleware = require('../middleware/error-handler');
-const authorizationMiddleware = require('../middleware/authorization');
-const notFoundMiddleware = require('../middleware/not-found');
+const errorHandlerMiddleware = require('./src/middleware/error-handler');
+const authorizationMiddleware = require('./src/middleware/authorization');
+const notFoundMiddleware = require('./src/middleware/not-found');
 
 app.use(xss());
 app.use(helmet());
 app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
-app.use(cors({ origin: process.env.CLIENT_URL }));
+app.use(cors());
 
 app.get('/', (req, res) => {
 	res.status(200).json({ message: 'welcome' });
@@ -60,12 +65,12 @@ const {
 	getUserID,
 	getSocketID,
 	removeUser,
-} = require('../socket/users');
+} = require('./src/socket/users');
 const {
 	createMessage,
 	deleteMessages,
 	deleteChat,
-} = require('../utils/messageSocketEvents');
+} = require('./src/utils/messageSocketEvents');
 
 io.on('connection', (socket) => {
 	io.emit('usersOnline', addUser(socket.handshake.query.id, socket.id));
