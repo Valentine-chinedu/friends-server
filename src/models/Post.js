@@ -46,6 +46,32 @@ const PostSchema = new mongoose.Schema(
 					default: new Date(),
 					required: true,
 				},
+				replies: [
+					{
+						commentedBy: {
+							type: mongoose.Types.ObjectId,
+							ref: 'User',
+							required: true,
+						},
+						commentId: {
+							type: mongoose.Types.ObjectId,
+							required: true,
+						},
+						comment: {
+							type: String,
+							required: true,
+						},
+						commentedAt: {
+							type: Date,
+							default: new Date(),
+							required: true,
+						},
+						replyTo: {
+							type: String,
+							required: true,
+						},
+					},
+				],
 			},
 		],
 	},
