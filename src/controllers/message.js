@@ -13,7 +13,7 @@ const deleteM = async (req, res) => {
 		const messages = await Chat.deleteMany({ lastMessage: { $exists: false } });
 		res.status(StatusCodes.OK).json({ messages });
 	}
-	res.json({ msg: 'feck u bitch' });
+	res.json({ msg: 'Message deleted' });
 };
 
 module.exports = { getMessages, deleteM };
