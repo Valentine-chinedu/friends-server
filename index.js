@@ -20,7 +20,7 @@ const server = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
 	cors: {
-		origin: 'https://friends-client.vercel.app/',
+		origin: 'https://friends-client.vercel.app',
 	},
 });
 
